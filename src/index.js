@@ -1,12 +1,35 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
 import * as serviceWorker from './serviceWorker';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+const App = () => {
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: http://bit.ly/CRA-PWA
-serviceWorker.unregister();
+    const content = {}
+    const prefix = ["Who is", "What is", "The history of"]
+
+    function handleSearchTerm(e){
+        return content.searchTerm = e.target.value
+    }
+
+    function handlePrefix(e){
+        return content.prefix = e.target.value
+    }
+
+    return(
+        <div>
+            <label htmlFor="searchTerm">Search Term:</label>
+            <input id="searchTerm" type="text" onChange={handleSearchTerm}/>
+
+            <br/>
+
+            <label htmlFor="prefix">Select one prefix</label>
+            <select id="prefixes" onChange={handlePrefix}>
+                { prefix.map( (vl, k) => <option value={vl} key={k}>{vl}</option>) }
+            </select>
+        </div>
+    )
+}
+
+ReactDOM.render(<App />, document.getElementById('root'))
+serviceWorker.unregister()
